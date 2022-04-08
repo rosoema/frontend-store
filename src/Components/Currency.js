@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 
 class Currency extends Component {
 
@@ -28,14 +28,14 @@ class Currency extends Component {
             <div>
                 <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency}</p>
                 { this.state.active === true && 
-                    <div>
+                    <Fragment>
                         { this.state.data.map( currency => 
                             <div onClick={() => this.setCurrency(currency.symbol)} key={currency.label} value={currency.symbol}>
                                 <p>{currency.label}</p>
                                 <p>{currency.symbol}</p>
                             </div>)
                         }
-                    </div>
+                    </Fragment>
                 }
             </div>
         )

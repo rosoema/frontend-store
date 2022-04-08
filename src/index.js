@@ -12,6 +12,10 @@ import {
 
 // Creating the GraphQL / Apollo Client
 
+window.addEventListener("popstate", function (event) {
+  
+})
+
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
   cache: new InMemoryCache()

@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import data from "../GraphQL/data";
 import logo from "../Media/logo.svg";
 import Currency from "./Currency.js";
-import Cart from "./Cart.js";
+import MiniCart from "./MiniCart.js";
+import { Nav , List , ListItem, Image } from "./styled/Header";
 
 class Navbar extends Component {
 
@@ -25,16 +26,20 @@ class Navbar extends Component {
                         return null;
                     } else {
                         return (
-                            <nav>
-                                <ul>
-                                    {data.categories.map( cat => <li key={cat.name}><Link to={"/" + cat.name}>{cat.name}</Link></li>)}
-                                </ul>
-                                <Link to={"/" + data.categories[0].name}><img src={logo} alt="store-logo" /></Link>
+                            <Nav>
+                                <List>
+                                    {data.categories.map( cat => 
+                                        <ListItem key={cat.name} className="header-links">
+                                            <Link to={"/" + cat.name}>{cat.name}</Link>
+                                        </ListItem>)
+                                    }
+                                </List>
+                                <Link to={"/" + data.categories[0].name}><Image src={logo} alt="store-logo" /></Link>
                                 <div className="currency-cart">
                                     <Currency value={data.currencies}/>
-                                    <Cart value={data} />
+                                    <MiniCart value={data} />
                                 </div>
-                            </nav>
+                            </Nav>
                         );
                     }
                 }}

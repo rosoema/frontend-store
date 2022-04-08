@@ -1,4 +1,5 @@
 import { Component, Fragment } from "react";
+import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 
 class App extends Component {
@@ -9,6 +10,9 @@ class App extends Component {
 
       <Fragment>
         <Navbar />
+        <Routes>
+
+        </Routes>
       </Fragment>
     
     )
