@@ -21,7 +21,6 @@ const ListItem = styled.li`
     font-family: "Raleway", sans-serif;
     font-size: 0.9rem;
     text-transform: uppercase;
-    color: black;
 
     &:hover{
         border-bottom: 1px solid #5ece7b;

@@ -48,6 +48,12 @@ main {
   cursor: pointer;
 }
 
+.arrow-up {
+  margin-left: 0.3rem;
+  cursor: pointer;
+  transform: rotate(180deg);
+}
+
 .show-currency {
   position: absolute;
   flex-direction: column;
@@ -66,6 +72,14 @@ main {
   box-shadow: 0 4px 35px rgba(0, 0, 0, 0.19);
   padding: 0 1rem;
   margin-left: -1rem;
+}
+
+.current {
+  border-bottom: 1px solid #5ece7b;
+}
+
+.current a {
+  color: #5ece7b !important;
 }
 
 h1 {

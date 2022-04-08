@@ -21,14 +21,14 @@ class Currency extends Component {
         this.setState({
             active: false,
             preferredCurrency: arg
-        })
+        });
         localStorage.setItem("preferredCurrency", arg)
     }
 
     render() {
         return (
             <div className="currency-open">
-                <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency} <img src={Arrow} alt="arrow-down" className="arrow"/></p>
+                <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency} <img src={Arrow} alt="arrow-down" className={this.state.active ? "arrow-up" : "arrow"}/></p>
                 <OuterClick onOuterClick = {
                     () => {
                         if(this.state.active === true){

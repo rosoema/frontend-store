@@ -8,6 +8,19 @@ import MiniCart from "./MiniCart.js";
 import { Nav , List , ListItem, Image } from "./styled/Header";
 
 
+let links = document.getElementsByClassName("header-links");
+
+window.addEventListener("click", () => {
+    let url = window.location.href;
+    let theEnd = url.split("/").pop();
+    for(let i = 0; i < links.length; i++){
+        if(links[i].classList.contains(theEnd)){
+            links[i].classList.add("current");
+        } else {
+            links[i].classList.remove("current");
+        }
+    }
+});
 
 class Navbar extends Component {
 
@@ -19,10 +32,6 @@ class Navbar extends Component {
     }
 
     render() {
-
-        window.addEventListener("popstate", () => {
-            
-        })
 
         return (
             <Query query={data}>
@@ -36,7 +45,7 @@ class Navbar extends Component {
                             <Nav>
                                 <List>
                                     {data.categories.map( cat =>
-                                        <ListItem key={cat.name} className="header-links" openOrNot={cat.name}>
+                                        <ListItem key={cat.name} className={"header-links " + cat.name}>
                                             <Link to={"/" + cat.name}>{cat.name}</Link>
                                         </ListItem>)
                                     } 
