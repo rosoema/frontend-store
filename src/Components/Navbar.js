@@ -32,7 +32,7 @@ class Navbar extends Component {
                                 <Link to={"/" + data.categories[0].name}><img src={logo} alt="store-logo" /></Link>
                                 <div className="currency-cart">
                                     <Currency value={data.currencies}/>
-                                    <Cart />
+                                    <Cart value={data} />
                                 </div>
                             </nav>
                         );
