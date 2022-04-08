@@ -19,7 +19,7 @@ class MiniCart extends Component {
     render() {
         return (
             <div>
-                <img src={cart} alt="cart" onClick={this.toggle.bind(this)}/>
+                <img src={cart} alt="cart" onClick={this.toggle.bind(this)} className="mini-cart"/>
                 <OuterClick onOuterClick= {
                     () => {
                         if(this.state.miniCart === true){

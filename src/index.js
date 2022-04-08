@@ -14,7 +14,7 @@ import {
 
 window.addEventListener("popstate", function (event) {
   
-})
+});
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/",

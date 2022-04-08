@@ -22,6 +22,50 @@ main {
 .currency-cart {
   display: flex;
   align-items: center;
+  margin-top: -0.8rem;
+  font-size: 0.9rem;
+}
+
+.currency-cart div {
+  margin-right: 1.3rem;
+  cursor: pointer;
+}
+
+.mini-cart {
+  margin-top: 0.3rem;
+  width: 1.1rem;
+}
+
+.currency-cart p {
+  display: flex;
+  font-family: "Raleway", sans-serif;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.arrow {
+  margin-left: 0.3rem;
+  cursor: pointer;
+}
+
+.show-currency {
+  position: absolute;
+  flex-direction: column;
+  display: flex;
+}
+
+.show-currency div {
+  display: flex;
+}
+
+.show-currency div p {
+  margin-right: 0.5rem;
+}
+
+.show-currency {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 0 1rem;
+  margin-left: -1rem;
 }
 
 h1 {

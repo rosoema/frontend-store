@@ -3,7 +3,8 @@ import styled from "styled-components";
 const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
-    margin: 1.5rem 6%;
+    margin: 1.5rem 6% 0 6%;
+    height: 2.2rem;
 `;
 
 const List = styled.ul`
@@ -28,7 +29,7 @@ const ListItem = styled.li`
 `;
 
 const Image = styled.img`
-    margin-left: -6rem;
+    margin-left: -4.4rem;
     width: 2rem;
 `;
 

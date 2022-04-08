@@ -1,4 +1,5 @@
 import { Component, Fragment } from "react";
+import Arrow from "../Media/Arrow_Down.svg";
 
 class Currency extends Component {
 
@@ -25,17 +26,17 @@ class Currency extends Component {
 
     render() {
         return (
-            <div>
-                <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency}</p>
+            <div className="currency-open">
+                <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency} <img src={Arrow} alt="arrow-down" className="arrow"/></p>
                 { this.state.active === true && 
-                    <Fragment>
+                    <div className="show-currency">
                         { this.state.data.map( currency => 
                             <div onClick={() => this.setCurrency(currency.symbol)} key={currency.label} value={currency.symbol}>
-                                <p>{currency.label}</p>
                                 <p>{currency.symbol}</p>
+                                <p>{currency.label}</p>
                             </div>)
                         }
-                    </Fragment>
+                    </div>
                 }
             </div>
         )
