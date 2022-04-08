@@ -7,6 +7,8 @@ import Currency from "./Currency.js";
 import MiniCart from "./MiniCart.js";
 import { Nav , List , ListItem, Image } from "./styled/Header";
 
+
+
 class Navbar extends Component {
 
     constructor(props){
@@ -17,6 +19,11 @@ class Navbar extends Component {
     }
 
     render() {
+
+        window.addEventListener("popstate", () => {
+            
+        })
+
         return (
             <Query query={data}>
                 {({ data, loading, error }) => {
@@ -28,11 +35,11 @@ class Navbar extends Component {
                         return (
                             <Nav>
                                 <List>
-                                    {data.categories.map( cat => 
-                                        <ListItem key={cat.name} className="header-links">
+                                    {data.categories.map( cat =>
+                                        <ListItem key={cat.name} className="header-links" openOrNot={cat.name}>
                                             <Link to={"/" + cat.name}>{cat.name}</Link>
                                         </ListItem>)
-                                    }
+                                    } 
                                 </List>
                                 <Link to={"/" + data.categories[0].name}><Image src={logo} alt="store-logo" /></Link>
                                 <div className="currency-cart">

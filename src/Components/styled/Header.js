@@ -25,6 +25,10 @@ const ListItem = styled.li`
 
     &:hover{
         border-bottom: 1px solid #5ece7b;
+
+        a {
+            color: #5ece7b;
+        }
     }
 `;
 

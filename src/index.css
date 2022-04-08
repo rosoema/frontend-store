@@ -63,7 +63,7 @@ main {
 }
 
 .show-currency {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 35px rgba(0, 0, 0, 0.19);
   padding: 0 1rem;
   margin-left: -1rem;
 }
@@ -73,10 +73,14 @@ h1 {
   margin: 0.67em 0;
 }
 
-a {
+a, a:visited {
   background-color: transparent;
   text-decoration: none;
   color: black;
+}
+
+a:active {
+  color: #5ece7b;
 }
 
 img {

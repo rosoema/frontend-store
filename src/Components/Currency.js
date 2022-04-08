@@ -1,5 +1,6 @@
-import { Component, Fragment } from "react";
+import { Component } from "react";
 import Arrow from "../Media/Arrow_Down.svg";
+import { OuterClick } from "react-outer-click";
 
 class Currency extends Component {
 
@@ -28,6 +29,13 @@ class Currency extends Component {
         return (
             <div className="currency-open">
                 <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency} <img src={Arrow} alt="arrow-down" className="arrow"/></p>
+                <OuterClick onOuterClick = {
+                    () => {
+                        if(this.state.active === true){
+                            this.setState({active: false})
+                        }
+                    }
+                }>
                 { this.state.active === true && 
                     <div className="show-currency">
                         { this.state.data.map( currency => 
@@ -38,6 +46,7 @@ class Currency extends Component {
                         }
                     </div>
                 }
+                </OuterClick>
             </div>
         )
     }
