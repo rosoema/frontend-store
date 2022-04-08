@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import data from "../GraphQL/data";
 import logo from "../Media/logo.svg";
 import Currency from "./Currency.js";
+import Cart from "./Cart.js";
 
 class Navbar extends Component {
 
@@ -19,7 +20,7 @@ class Navbar extends Component {
             <Query query={data}>
                 {({ data, loading, error }) => {
                     if(loading) {
-                        return "Loading..."; // Put in an error page
+                        return "Loading..."; // Put in an error page ?
                     } if(error) {
                         return null;
                     } else {
@@ -31,6 +32,7 @@ class Navbar extends Component {
                                 <Link to={"/" + data.categories[0].name}><img src={logo} alt="store-logo" /></Link>
                                 <div className="currency-cart">
                                     <Currency value={data.currencies}/>
+                                    <Cart />
                                 </div>
                             </nav>
                         );
