@@ -28,14 +28,12 @@ class Currency extends Component {
     render() {
         return (
             <div className="currency-open">
-                <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency} <img src={Arrow} alt="arrow-down" className={this.state.active ? "arrow-up" : "arrow"}/></p>
                 <OuterClick onOuterClick = {
                     () => {
-                        if(this.state.active === true){
-                            this.setState({active: false})
-                        }
+                        this.setState({active: false})
                     }
                 }>
+                <p onClick={this.toggle.bind(this)}>{this.state.preferredCurrency} <img src={Arrow} alt="arrow-down" className={this.state.active ? "arrow-up" : "arrow"}/></p>
                 { this.state.active === true && 
                     <div className="show-currency">
                         { this.state.data.map( currency => 

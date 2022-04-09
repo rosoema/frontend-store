@@ -1,6 +1,7 @@
 import { Component } from "react";
 import cart from "../Media/Cart.svg";
 import { OuterClick } from "react-outer-click";
+import { Bag } from "../Components/styled/Header.js"
 
 class MiniCart extends Component {
 
@@ -19,17 +20,16 @@ class MiniCart extends Component {
     render() {
         return (
             <div>
-                <img src={cart} alt="cart" onClick={this.toggle.bind(this)} className="mini-cart"/>
                 <OuterClick onOuterClick= {
                     () => {
-                        if(this.state.miniCart === true){
-                            this.setState({miniCart: false})
-                        }
-                    }} >
+                        this.setState({miniCart: false})
+                }} >
+                <img src={cart} alt="cart" onClick={this.toggle.bind(this)} className="mini-cart"/>
                     {this.state.miniCart &&
-                        <div>
+                        <Bag>
                             <p>My Bag</p>
-                        </div>
+                        </Bag>
+                        
                     }
                 </OuterClick>
             </div>

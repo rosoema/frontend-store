@@ -5,6 +5,7 @@ const Nav = styled.nav`
     justify-content: space-between;
     margin: 1.5rem 6% 0 6%;
     height: 2.2rem;
+    z-index: 90;
 `;
 
 const List = styled.ul`
@@ -32,8 +33,14 @@ const ListItem = styled.li`
 `;
 
 const Image = styled.img`
-    margin-left: -4.4rem;
+    margin-left: -4rem;
     width: 2rem;
 `;
 
-export { Nav, List, ListItem, Image };
+const Bag = styled.div`
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+`;
+
+export { Nav, List, ListItem, Image, Bag };

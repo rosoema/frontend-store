@@ -1,6 +1,7 @@
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  overflow-x: hidden;
 }
 
 body {
@@ -27,7 +28,7 @@ main {
 }
 
 .currency-cart div {
-  margin-right: 1.3rem;
+  margin-right: 0.5rem;
   cursor: pointer;
 }
 
