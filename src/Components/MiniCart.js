@@ -29,7 +29,6 @@ class MiniCart extends Component {
                         <Bag>
                             <p>My Bag</p>
                         </Bag>
-                        
                     }
                 </OuterClick>
             </div>

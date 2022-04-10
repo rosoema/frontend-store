@@ -1,7 +1,7 @@
 import { Query } from "@apollo/client/react/components";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import data from "../GraphQL/data";
+import Data from "../GraphQL/data";
 import logo from "../Media/logo.svg";
 import Currency from "./Currency.js";
 import MiniCart from "./MiniCart.js";
@@ -27,7 +27,7 @@ class Navbar extends Component {
     render() {
 
         return (
-            <Query query={data}>
+            <Query query={Data}>
                 {({ data, loading, error }) => {
                     if(loading) {
                         return "Loading..."; // Put in an error page ?
@@ -39,11 +39,11 @@ class Navbar extends Component {
                                 <List>
                                     {data.categories.map( cat =>
                                         <ListItem key={cat.name} className={"header-links " + cat.name}>
-                                            <Link to={"/" + cat.name}>{cat.name}</Link>
+                                            <Link to={"/category/" + cat.name} onClick={() => localStorage.setItem("category", cat.name)}>{cat.name}</Link>
                                         </ListItem>)
                                     } 
                                 </List>
-                                <Link to={"/" + data.categories[0].name}><Image src={logo} alt="store-logo" /></Link>
+                                <Link to={"/category/" + data.categories[0].name}><Image src={logo} alt="store-logo" /></Link>
                                 <div className="currency-cart">
                                     <Currency value={data.currencies}/>
                                     <MiniCart value={data} />
