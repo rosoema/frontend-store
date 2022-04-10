@@ -59,6 +59,7 @@ main {
   position: absolute;
   flex-direction: column;
   display: flex;
+  background-color: white;
 }
 
 .show-currency div {
