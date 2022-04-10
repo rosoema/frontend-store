@@ -7,7 +7,8 @@ import { Query } from "@apollo/client/react/components";
 
 class App extends Component {
 
-  render() {
+  render(){
+
     return (
       <Query query={Data}>
                 {({ data, loading, error }) => {
@@ -20,15 +21,14 @@ class App extends Component {
                             <Fragment>
                               <Navbar value={data} />
                               <Routes>
-                                <Route path="/category/:id" element={<Category/>} />
-                                <Route path="/product/:id" element={<Element/>} />
-                                <Route path="/cart" element={<Cart/>} />*/}
+                                <Route path="/" element={<Category path="all" />} />
+                                <Route path="/category/:id" element={<Category value={data.categories}/>}/>
                               </Routes>
                             </Fragment>
                         );
                     }
                 }}
-            </Query>    
+        </Query>    
     )
   }
 
