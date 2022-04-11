@@ -51,6 +51,11 @@ const ProductDiv = styled.div`
         font-size: 1rem;
         font-weight: 100;
         color: #1D1F22;
+
+        .brand {
+            font-weight: 600;
+            margin-right: .3rem;
+        }
     }
 
     .price {
