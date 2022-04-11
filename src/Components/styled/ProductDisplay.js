@@ -5,6 +5,13 @@ const Wrapper = styled.div`
     flex-direction: column;
     padding: 0 calc(6% + 1rem);
     margin: 2rem auto;
+
+    h1 {
+        font-family: "Raleway", sans-serif;
+        font-size: 2.5rem;
+        font-weight: 400;
+        text-transform: capitalize;
+    }
 `;
 
 const ProductsContainer = styled.div`

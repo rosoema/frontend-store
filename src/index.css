@@ -89,14 +89,10 @@ h1 {
   margin: 0.67em 0;
 }
 
-a, a:visited {
+a, a:visited, a:active {
   background-color: transparent;
   text-decoration: none;
   color: black;
-}
-
-a:active {
-  color: #5ece7b;
 }
 
 img {
