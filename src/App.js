@@ -23,6 +23,8 @@ class App extends Component {
                               <Routes>
                                 <Route path="/" element={<Category path="all" value={data.categories}/>} />
                                 <Route path="/category/:id" element={<Category value={data.categories}/>}/>
+                                <Route />
+                                <Route />
                               </Routes>
                             </Fragment>
                         );

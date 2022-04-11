@@ -26,14 +26,24 @@ const ProductDiv = styled.div`
     min-width: 21rem;
     min-height: 25rem;
     margin: 1rem;
-    padding: .5rem;
+    padding: .7rem;
+    transition: .3s;
 
-    div {
+    .productImage {
         width: 100%;
         height: 23rem;
         background-position: top center;
         background-repeat: no-repeat;
         background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: black;
+        }
     }
 
     p {
@@ -45,6 +55,26 @@ const ProductDiv = styled.div`
 
     .price {
         font-weight: 600;
+    }
+
+    .addToCart {
+        margin: -1.6rem 0 -1.6rem 17rem;
+        position: absolute;
+        display: none;
+        transition: .3s;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 4px 35px rgba(0, 0, 0, 0.2);
+
+        .addToCart {
+            display: block;
+        }
     }
 `;
 
