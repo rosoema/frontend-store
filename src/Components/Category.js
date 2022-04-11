@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Category extends Component {
 
@@ -22,7 +23,28 @@ class Category extends Component {
         });
 
         return (
-            <div>{this.state.category}</div>
+            <div>
+                <h1>{this.state.category}</h1>
+                {this.state.data.map( category => 
+                    category.name === this.state.category ? 
+                            category.products.map( product => 
+                                <Link key={product.id} to={"/product/" + product.id}>
+                                    <div>
+                                        <img src={product.gallery[0]} alt={product.name} />
+                                        <p>{product.name}</p>
+                                        {
+                                            product.prices.map( price => 
+                                                price.currency.symbol === this.state.currency ? 
+                                                <p key={price.amount}>{price.currency.symbol}<span>{price.amount}</span></p>
+                                                : null
+                                            )
+                                        }
+                                    </div>
+                                </Link>   
+                            )
+                            : null
+                )}
+            </div>
         )
     }
 }

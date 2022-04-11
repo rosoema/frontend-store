@@ -21,7 +21,7 @@ class App extends Component {
                             <Fragment>
                               <Navbar value={data} />
                               <Routes>
-                                <Route path="/" element={<Category path="all" />} />
+                                <Route path="/" element={<Category path="all" value={data.categories}/>} />
                                 <Route path="/category/:id" element={<Category value={data.categories}/>}/>
                               </Routes>
                             </Fragment>
