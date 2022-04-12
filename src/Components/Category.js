@@ -6,15 +6,17 @@ import addToCart from "../Media/addToCart.svg";
 class Category extends Component {
 
     constructor(props) {
+
         super(props);
         this.state = {
             category: this.props.path,
             data: this.props.value,
-            currency: "$",
-            products: []
+            currency: localStorage.getItem("preferredCurrency") || "$",
+            cart: JSON.parse(localStorage.getItem("cart"))
         }
 
         this.putInCart = this.putInCart.bind(this);
+
         if (window.performance) {
             if (performance.navigation.type == 1) {
                 let url = window.location.href;
@@ -33,7 +35,38 @@ class Category extends Component {
     }
 
     putInCart(e){
-        
+        if(localStorage.getItem("cart") === null){
+            this.setState({
+                cart: [{
+                    id: e.target.dataset.value,
+                    num: 1
+                }]
+            }, () => {
+                let newCart = JSON.stringify(this.state.cart);
+                localStorage.setItem("cart", newCart);
+            })
+        } else {
+            let oldCart = JSON.parse(localStorage.getItem("cart"));
+            let cart = [];
+            
+            oldCart.map( item => {
+                if(item.id === e.target.dataset.value){
+                    cart.push({
+                        id: item.id,
+                        num: item.num + 1
+                    })
+                } else {
+                    cart.push({
+                        id: item.id,
+                        num: 1
+                    })
+                }
+            });
+            this.setState({
+                cart: cart
+            });
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
     }
     
     render() {
@@ -44,12 +77,14 @@ class Category extends Component {
             if(theEnd === ""){
                 localStorage.setItem("category", this.props.path);
                 this.setState({
-                    category: this.props.path
+                    category: this.props.path,
+                    currency: localStorage.getItem("preferredCurrency") ? localStorage.getItem("preferredCurrency") : "$"
                 })
             } else {
                 localStorage.setItem("category", theEnd);
                 this.setState({
-                    category: theEnd
+                    category: theEnd,
+                    currency: localStorage.getItem("preferredCurrency") ? localStorage.getItem("preferredCurrency") : "$"
                 })
             }
         });

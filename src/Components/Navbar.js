@@ -8,7 +8,7 @@ import { Nav , List , ListItem, Image } from "./styled/Header";
 
 let links = document.getElementsByClassName("header-links");
 
-const addCurrent = () => {
+function addCurrent () {
     let url = window.location.href;
     let theEnd = url.split("/").pop();
     for(let i = 0; i < links.length; i++){
@@ -24,6 +24,7 @@ window.addEventListener("click", () => {
     addCurrent()
 });
 
+
 class Navbar extends Component {
 
     constructor(props){
@@ -31,6 +32,10 @@ class Navbar extends Component {
         this.state = {
             data: this.props.value
         }
+    }
+
+    componentDidMount(){
+        addCurrent();
     }
 
     render() {
