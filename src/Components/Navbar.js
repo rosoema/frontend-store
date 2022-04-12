@@ -8,7 +8,7 @@ import { Nav , List , ListItem, Image } from "./styled/Header";
 
 let links = document.getElementsByClassName("header-links");
 
-window.addEventListener("click", () => {
+const addCurrent = () => {
     let url = window.location.href;
     let theEnd = url.split("/").pop();
     for(let i = 0; i < links.length; i++){
@@ -18,6 +18,10 @@ window.addEventListener("click", () => {
             links[i].classList.remove("current");
         }
     }
+}
+
+window.addEventListener("click", () => {
+    addCurrent()
 });
 
 class Navbar extends Component {

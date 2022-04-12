@@ -63,7 +63,7 @@ const ProductDiv = styled.div`
     }
 
     .addToCart {
-        margin: -1.6rem 0 -1.6rem 17rem;
+        margin: -7rem 0 -7rem 17rem;
         position: absolute;
         display: none;
         transition: .3s;

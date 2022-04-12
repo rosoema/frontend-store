@@ -19,7 +19,7 @@ class App extends Component {
                     } else {
                         return (
                             <Fragment>
-                              <Navbar value={data} />
+                              <Navbar value={data}/>
                               <Routes>
                                 <Route path="/" element={<Category path="all" value={data.categories}/>} />
                                 <Route path="/category/:id" element={<Category value={data.categories}/>}/>

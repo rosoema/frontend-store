@@ -8,22 +8,70 @@ class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: this.props.path || localStorage.getItem("category"),
+            category: this.props.path,
             data: this.props.value,
-            currency: localStorage.getItem("preferredCurrency") || "$",
+            currency: "$",
             products: []
         }
+
+        this.putInCart = this.putInCart.bind(this);
+        if (window.performance) {
+            if (performance.navigation.type == 1) {
+                let url = window.location.href;
+                let theEnd = url.split("/").pop();
+                if(theEnd === ""){
+                    localStorage.setItem("category", this.props.path);
+                    this.state.category = this.props.path
+                } else {
+                    localStorage.setItem("category", theEnd);
+                    this.state.category = theEnd
+                }
+            } else {
+              return null
+            }
+        }
+    }
+
+    putInCart(e){
+        
     }
     
     render() {
 
         window.addEventListener("click", () => {
-            this.setState(
-                {
-                    category: localStorage.getItem("category"),
-                    currency: localStorage.getItem("preferredCurrency")
-                }
-            );
+            let url = window.location.href;
+            let theEnd = url.split("/").pop();
+            if(theEnd === ""){
+                localStorage.setItem("category", this.props.path);
+                this.setState({
+                    category: this.props.path
+                })
+            } else {
+                localStorage.setItem("category", theEnd);
+                this.setState({
+                    category: theEnd
+                })
+            }
+        });
+
+        window.addEventListener("popstate", () => {
+            let url = window.location.href;
+            let theEnd = url.split("/").pop();
+            if(theEnd !== ""){
+                this.setState(
+                    {
+                        category: theEnd,
+                        currency: localStorage.getItem("preferredCurrency") || "$"
+                    }
+                );
+            } else {
+                this.setState(
+                    {
+                        category: this.props.path,
+                        currency: localStorage.getItem("preferredCurrency") || "$"
+                    }
+                );
+            }
         });
 
         return (
@@ -35,29 +83,31 @@ class Category extends Component {
                             category.name === this.state.category ? 
                                 category.products.map( product =>
                                     <ProductDiv key={product.id} style={{opacity: product.inStock ? "1" : "0.3", }}>
-                                        <div className="productImage" style={{backgroundImage: `url(${product.gallery[1] ? product.gallery[1] : product.gallery[0]})`}}>
-                                            {product.inStock === false && 
-                                                <p>OUT OF STOCK</p>}
-                                        </div>
+                                        <Link to={"/product/" + product.id}>
+                                            <div className="productImage" style={{backgroundImage: `url(${product.gallery[1] ? product.gallery[1] : product.gallery[0]})`}}>
+                                                {product.inStock === false && 
+                                                    <p>OUT OF STOCK</p>}
+                                            </div>
+                                            <div>
+                                                <p><span className="brand">{product.brand}</span>{product.name}</p>
+                                                {
+                                                    product.prices.map( price => 
+                                                        price.currency.symbol === this.state.currency ? 
+                                                        <p key={price.amount} className="price">{price.currency.symbol}<span>{price.amount}</span></p>
+                                                        : null
+                                                    )
+                                                }
+                                            </div>
+                                        </Link>
                                         {
                                             product.inStock ? 
                                             product.attributes.length <= 0 ? 
-                                                <img src={addToCart} alt="add-to-cart" className="addToCart" />
+                                                <img src={addToCart} alt="add-to-cart" className="addToCart" onClick={this.putInCart} data-value={product.id}/>
                                             : <Link to={"/product/" + product.id} className="addToCart">
                                                 <img src={addToCart} alt="add-to-cart" />
                                             </Link>
                                             : null
                                         }
-                                        <div>
-                                            <p><span className="brand">{product.brand}</span>{product.name}</p>
-                                            {
-                                                product.prices.map( price => 
-                                                    price.currency.symbol === this.state.currency ? 
-                                                    <p key={price.amount} className="price">{price.currency.symbol}<span>{price.amount}</span></p>
-                                                    : null
-                                                )
-                                            }
-                                        </div>
                                     </ProductDiv> 
                                 )
                                 : null
