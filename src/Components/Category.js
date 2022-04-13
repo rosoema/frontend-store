@@ -35,37 +35,52 @@ class Category extends Component {
     }
 
     putInCart(e){
+        let oldCart = this.state.cart;
+        let newCart;
+
         if(localStorage.getItem("cart") === null){
-            this.setState({
-                cart: [{
+            newCart = [
+                {
                     id: e.target.dataset.value,
                     num: 1
-                }]
-            }, () => {
-                let newCart = JSON.stringify(this.state.cart);
-                localStorage.setItem("cart", newCart);
-            })
-        } else {
-            let oldCart = JSON.parse(localStorage.getItem("cart"));
-            let cart = [];
-            
-            oldCart.map( item => {
-                if(item.id === e.target.dataset.value){
-                    cart.push({
-                        id: item.id,
-                        num: item.num + 1
-                    })
-                } else {
-                    cart.push({
-                        id: item.id,
-                        num: 1
-                    })
                 }
-            });
+            ];
             this.setState({
-                cart: cart
+                cart: newCart
+            }, () => {
+                localStorage.setItem("cart", JSON.stringify(this.state.cart))
             });
-            localStorage.setItem("cart", JSON.stringify(cart));
+        } else {
+            let match = oldCart.filter( item => item.id === e.target.dataset.value );
+            let noMatch = oldCart.filter( item => item.id !== e.target.dataset.value );
+        
+            if(match.length <= 0){
+                newCart = [
+                    ...noMatch,
+                    {
+                        id: e.target.dataset.value,
+                        num: 1
+                    }
+                ];
+                this.setState({
+                    cart: newCart
+                }, () => {
+                    localStorage.setItem("cart", JSON.stringify(this.state.cart))
+                });
+            } else {
+                newCart = [
+                    ...noMatch,
+                    {
+                        id: e.target.dataset.value,
+                        num: match[0].num + 1
+                    }
+                ];
+                this.setState({
+                    cart: newCart
+                }, () => {
+                    localStorage.setItem("cart", JSON.stringify(this.state.cart))
+                });
+            }
         }
     }
     
@@ -139,7 +154,7 @@ class Category extends Component {
                                             product.attributes.length <= 0 ? 
                                                 <img src={addToCart} alt="add-to-cart" className="addToCart" onClick={this.putInCart} data-value={product.id}/>
                                             : <Link to={"/product/" + product.id} className="addToCart">
-                                                <img src={addToCart} alt="add-to-cart" />
+                                                <img src={addToCart} alt="add-to-cart"/>
                                             </Link>
                                             : null
                                         }

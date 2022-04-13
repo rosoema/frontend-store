@@ -8,7 +8,7 @@ class Currency extends Component {
         super(props);
         this.state = {
             data: this.props.value,
-            preferredCurrency: this.props.value[0].symbol,
+            preferredCurrency: localStorage.getItem("preferredCurrency") || "$",
             active: false
         }
     }
