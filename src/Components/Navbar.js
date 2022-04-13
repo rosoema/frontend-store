@@ -21,7 +21,7 @@ function addCurrent () {
 }
 
 window.addEventListener("click", () => {
-    addCurrent()
+    addCurrent();
 });
 
 
@@ -30,7 +30,8 @@ class Navbar extends Component {
     constructor(props){
         super(props);
         this.state = {
-            data: this.props.value
+            data: this.props.value,
+            cart: JSON.parse(localStorage.getItem("cart"))
         }
     }
 
@@ -39,6 +40,12 @@ class Navbar extends Component {
     }
 
     render() {
+
+        window.addEventListener("click", () => {
+            this.setState({
+                cart: JSON.parse(localStorage.getItem("cart"))
+            })
+        });
 
         return (
             <Nav>
@@ -52,8 +59,12 @@ class Navbar extends Component {
                     <Link to={"/category/" + this.state.data.categories[0].name} onClick={() => localStorage.setItem("category", this.state.data.categories[0].name)}><Image src={logo} alt="store-logo" /></Link>
                     <div className="currency-cart">
                         <Currency value={this.state.data.currencies}/>
-                        <MiniCart value={this.state.data} />
+                        <MiniCart value={this.state.data}/>
                     </div>
+                    {this.state.cart? 
+                        <p className="cart-num">{this.state.cart.length}</p>
+                        : null
+                    }
             </Nav>
                         
                     

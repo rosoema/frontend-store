@@ -42,7 +42,12 @@ class Category extends Component {
             newCart = [
                 {
                     id: e.target.dataset.value,
-                    num: 1
+                    num: 1,
+                    name: e.target.dataset.name,
+                    brand: e.target.dataset.brand,
+                    gallery: e.target.dataset.gallery,
+                    price: e.target.dataset.price,
+                    attributes: e.target.dataset.attributes
                 }
             ];
             this.setState({
@@ -59,7 +64,12 @@ class Category extends Component {
                     ...noMatch,
                     {
                         id: e.target.dataset.value,
-                        num: 1
+                        num: 1,
+                        name: e.target.dataset.name,
+                        brand: e.target.dataset.brand,
+                        gallery: e.target.dataset.gallery,
+                        price: e.target.dataset.price,
+                        attributes: e.target.dataset.attributes
                     }
                 ];
                 this.setState({
@@ -72,7 +82,12 @@ class Category extends Component {
                     ...noMatch,
                     {
                         id: e.target.dataset.value,
-                        num: match[0].num + 1
+                        num: match[0].num + 1,
+                        name: e.target.dataset.name,
+                        brand: e.target.dataset.brand,
+                        gallery: e.target.dataset.gallery,
+                        price: e.target.dataset.price,
+                        attributes: e.target.dataset.attributes
                     }
                 ];
                 this.setState({
@@ -152,7 +167,14 @@ class Category extends Component {
                                         {
                                             product.inStock ? 
                                             product.attributes.length <= 0 ? 
-                                                <img src={addToCart} alt="add-to-cart" className="addToCart" onClick={this.putInCart} data-value={product.id}/>
+                                                <img src={addToCart} alt="add-to-cart" className="addToCart" onClick={this.putInCart} 
+                                                    data-value={product.id} 
+                                                    data-name={product.name} 
+                                                    data-gallery={product.gallery[1] ? product.gallery[1] : product.gallery[0]}
+                                                    data-brand={product.brand}
+                                                    data-price={JSON.stringify(product.prices)}
+                                                    data-attributes={JSON.stringify(product.attributes)}
+                                                />
                                             : <Link to={"/product/" + product.id} className="addToCart">
                                                 <img src={addToCart} alt="add-to-cart"/>
                                             </Link>

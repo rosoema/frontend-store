@@ -6,6 +6,20 @@ const Nav = styled.nav`
     margin: 1.5rem 6% 0 6%;
     height: 2.2rem;
     z-index: 90;
+
+    .cart-num {
+        position: absolute;
+        right: calc(6% + 0.3rem);
+        top: .4rem;
+        background-color: black;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        padding: 0.2rem 0.4rem .2rem .35rem;
+        font-size: .7rem;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+    }
 `;
 
 const List = styled.ul`
