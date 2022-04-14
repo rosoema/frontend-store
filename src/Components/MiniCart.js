@@ -4,6 +4,8 @@ import { OuterClick } from "react-outer-click";
 import { Bag } from "./styled/Header.js";
 import { Title, Wrapper, ProductWrapper, Overlay } from "./styled/MiniCart.js";
 import { Link } from "react-router-dom";
+import minus from "../Media/minus-square.svg";
+import plus from "../Media/plus-square.svg";
 
 class MiniCart extends Component {
 
@@ -87,7 +89,7 @@ class MiniCart extends Component {
         return (
             <div>
                 {
-                    this.state.miniCart && <Overlay height={document.body.offsetHeight + "px"}/>
+                    this.state.miniCart && <Overlay height={document.body.offsetHeight < window.innerHeight ? window.innerHeight + "px" : document.body.offsetHeight + "px"}/>
                 }
                 <OuterClick onOuterClick= {
                     () => {
@@ -109,12 +111,12 @@ class MiniCart extends Component {
                                                     {
                                                         JSON.parse(item.price).map( curr =>
                                                             {
-                                                                if(curr.currency.symbol === localStorage.getItem("preferredCurrency")) { 
-                                                                    <p key={curr.currency.symbol} className="product-price">
-                                                                        {curr.currency.symbol}
-                                                                        <span>{curr.amount * item.num}</span>
-                                                                    </p>
-                                                                    this.state.total.push(curr.amount * item.num)
+                                                                if(curr.currency.symbol === localStorage.getItem("preferredCurrency")) {
+                                                                    return <p key={curr.currency.symbol} className="product-price">
+                                                                                {curr.currency.symbol}
+                                                                                <span>{curr.amount * item.num}</span>
+                                                                                {this.state.total.push(curr.amount * item.num)}
+                                                                            </p>
                                                                 }
                                                             }
                                                         )    
@@ -136,11 +138,11 @@ class MiniCart extends Component {
                                                 </div>
                                                 <div className="button-image">
                                                     <div className="add-remove-buttons">
-                                                        <p className="add-remove" onClick={this.add.bind(this)}
-                                                            data-value={item.id}
-                                                        >+</p>
-                                                        <p>{item.num}</p>
-                                                        <p className="add-remove" onClick={this.remove.bind(this)} data-value={item.id}>-</p>
+                                                    <img src={plus} className="add-remove" onClick={this.add.bind(this)}
+                                                        data-value={item.id} alt="plus"/>
+                                                    <p>{item.num}</p>
+                                                    <img src={minus} className="add-remove" onClick={this.remove.bind(this)} 
+                                                        data-value={item.id} alt="minus"/>
                                                     </div>
                                                     <div style={{
                                                         backgroundImage: `url("${item.gallery}")`
@@ -154,7 +156,7 @@ class MiniCart extends Component {
                                         <p>{this.state.currency}{Math.round(this.state.total.reduce((a,b) => a+b, 0) * 100) / 100}</p>
                                     </div>
                                     <div className="buttons">
-                                        <Link to="/cart">View bag</Link>
+                                        <Link to="/cart" onClick={() => { this.setState({miniCart: false})}}>View bag</Link>
                                         <button>Check out</button>
                                     </div>
                                 </Wrapper>

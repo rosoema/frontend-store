@@ -199,18 +199,14 @@ main {
   justify-content: space-between;
 }
 
+.add-remove {
+  transition: .2s;
+}
+
 .add-remove-buttons p {
   margin: 0;
   font-weight: 400;
-  font-size: 1rem;
-}
-
-.add-remove {
-  font-size: 1.6rem;
-  line-height: 1.5rem;
-  border: 1px solid black;
-  padding: 0 .4rem;
-  transition: 0.2s;
+  font-size: 1.1rem !important;
 }
 
 .add-remove:hover {
@@ -227,6 +223,64 @@ main {
 
 .total p {
   font-weight: 700;
+}
+
+.cart-container {
+  padding: 0  15% 0 calc(6% + 1rem);
+  margin-top: 3rem;
+  font-family: "Raleway", sans-serif;
+}
+
+.notify {
+  text-transform: uppercase;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 2rem;
+  margin: 6rem 0;
+}
+
+.cart-title {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.cart-image {
+  width: 9rem;
+  height: 12rem;
+}
+
+hr {
+  opacity: .5;
+  margin: 1.5rem 0;
+}
+
+.cart-product-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-product-main p{
+  margin: 0 0 .7rem 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.cart-product-main p:first-child {
+  font-weight: 600;
+}
+
+.cart-product-price, .cart-total {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin-top: 1.5rem !important;
+}
+
+.cart-buttons p {
+  font-size: 1.4rem !important;
+}
+
+.cart-buttons img {
+  width: 1.8rem;
 }
 
 h1 {

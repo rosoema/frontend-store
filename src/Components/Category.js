@@ -15,10 +15,8 @@ class Category extends Component {
             cart: JSON.parse(localStorage.getItem("cart"))
         }
 
-        this.putInCart = this.putInCart.bind(this);
-
         if (window.performance) {
-            if (performance.navigation.type == 1) {
+            if (performance.navigation.type === 1) {
                 let url = window.location.href;
                 let theEnd = url.split("/").pop();
                 if(theEnd === ""){
@@ -167,7 +165,7 @@ class Category extends Component {
                                         {
                                             product.inStock ? 
                                             product.attributes.length <= 0 ? 
-                                                <img src={addToCart} alt="add-to-cart" className="addToCart" onClick={this.putInCart} 
+                                                <img src={addToCart} alt="add-to-cart" className="addToCart" onClick={this.putInCart.bind(this)} 
                                                     data-value={product.id} 
                                                     data-name={product.name} 
                                                     data-gallery={product.gallery[1] ? product.gallery[1] : product.gallery[0]}
