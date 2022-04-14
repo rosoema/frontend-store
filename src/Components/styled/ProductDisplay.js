@@ -29,49 +29,11 @@ const ProductDiv = styled.div`
     padding: .7rem;
     transition: .3s;
 
-    .productImage {
-        width: 100%;
-        height: 23rem;
-        background-position: top center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        p {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: black;
-        }
-    }
-
     p {
         font-family: "Raleway", sans-serif;
         font-size: 1rem;
         font-weight: 100;
         color: #1D1F22;
-
-        .brand {
-            font-weight: 600;
-            margin-right: .3rem;
-        }
-    }
-
-    .price {
-        font-weight: 600;
-    }
-
-    .addToCart {
-        margin: -7rem 0 -7rem 17rem;
-        position: absolute;
-        display: none;
-        transition: .3s;
-        cursor: pointer;
-
-        &:hover {
-            transform: scale(1.1);
-        }
     }
 
     &:hover {
