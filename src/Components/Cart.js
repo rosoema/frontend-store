@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, Fragment } from "react";
 import minus from "../Media/minus-square.svg";
 import plus from "../Media/plus-square.svg";
 
@@ -82,6 +82,7 @@ class Cart extends Component {
                             <div>
                                 {
                                     this.state.cart.map( item => 
+                                        <Fragment>
                                         <div key={item.id} className="cart-product-container">
                                             <div className="cart-product-main">
                                                 <p>{item.brand}</p>
@@ -100,18 +101,29 @@ class Cart extends Component {
                                                     )    
                                                 }
                                                 <div>
-                                                    {
-                                                        JSON.parse(item.attributes).map( set => 
-                                                            set.type === "text" ?
-                                                            set.items.map( item => 
-                                                                <p key={item.name}>{item.displayValue}</p>
-                                                            )
-                                                            : 
-                                                            set.items.map( item => 
-                                                                <p key={item.name} style={{backgroundColor: `${item.value}`}}>hello</p>
-                                                            )
+                                                {
+                                                    JSON.parse(item.attributes).map( set => 
+                                                        JSON.parse(item.chosenAtt).map( chosenSet => 
+                                                            set.type === "text" && set.name === chosenSet.set ?
+                                                                <div key={set.name} className="minicart-att">
+                                                                    {set.items.map( value => 
+                                                                        value.value === chosenSet.value ?    
+                                                                        <p className="minicart-att-value big-cart-att" key={value.id} style={{backgroundColor: "black", color: "white", opacity: "1"}}>{value.id}</p>
+                                                                        : <p className="minicart-att-value big-cart-att" key={value.id} style={{opacity: "0.3"}}>{value.id}</p>
+                                                                    )}
+                                                                </div>
+                                                            : set.type === "swatch" && set.name === chosenSet.set ?
+                                                                <div key={set.name} className="minicart-att">
+                                                                    {set.items.map( value => 
+                                                                        value.displayValue === chosenSet.value ?    
+                                                                        <p className="minicart-att-value value-not-text big-cart-not-text" key={value.id} style={{backgroundColor: `${value.value}`, opacity: "1"}}></p>
+                                                                        : <p className="minicart-att-value value-not-text big-cart-not-text" key={value.id} style={{backgroundColor: `${value.value}`, opacity: ".3"}}></p>
+                                                                    )}
+                                                                </div>
+                                                            : null
                                                         )
-                                                    }
+                                                    )                                            
+                                                }
                                                 </div>
                                             </div>
                                             <div className="button-image">
@@ -127,9 +139,10 @@ class Cart extends Component {
                                                 }} className="product-image cart-image"/>
                                             </div>
                                         </div>
+                                        <hr />
+                                        </Fragment>
                                     )
                                 }
-                                <hr/>
                                 <div className="total cart-total">
                                     <p>Total:</p>
                                     <p>{localStorage.getItem("preferredCurrency")}{Math.round(this.state.total.reduce((a,b) => a+b, 0) * 100) / 100}</p>

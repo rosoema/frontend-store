@@ -245,8 +245,10 @@ main {
 }
 
 .cart-image {
-  width: 9rem;
-  height: 12rem;
+  width: 15rem;
+  height: 19rem;
+  background-position: center;
+  background-size: contain;
 }
 
 hr {
@@ -257,12 +259,13 @@ hr {
 .cart-product-container {
   display: flex;
   justify-content: space-between;
+  margin: 2rem 0;
 }
 
 .cart-product-main p{
   margin: 0 0 .7rem 0;
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .cart-product-main p:first-child {
@@ -273,6 +276,7 @@ hr {
   font-size: 1.25rem !important;
   font-weight: 700 !important;
   margin-top: 1.5rem !important;
+  margin-bottom: 2rem !important;
 }
 
 .cart-buttons p {
@@ -282,6 +286,171 @@ hr {
 .cart-buttons img {
   width: 1.8rem;
   cursor: pointer;
+}
+
+.product-page-container {
+  margin: 4rem 6%;
+  display: flex;
+  font-family: "Raleway", sans-serif;
+}
+
+.gallery-container {
+  display: flex;
+}
+
+.mini-image-container {
+  height: 32rem;
+  overflow-y: scroll;
+  margin-right: 3rem;
+}
+
+.mini-image {
+  width: 5rem;
+  height: 5rem;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  margin-bottom: 2rem;
+}
+
+.main-image {
+  width: 38rem;
+  height: 32rem;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.product-main-image {
+  width: 38rem;
+  height: 32rem;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.product-page-info {
+  width: 19rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 6rem;
+  overflow-y: visible;
+}
+
+.att-price {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: .9rem;
+}
+
+.product-price {
+  font-size: 1.3rem;
+  font-weight: bold !important;
+}
+
+.att-cont {
+  display: flex;
+  margin: 1.6rem 0 3.5rem 0;
+  list-style: none;
+  padding-left: 0;
+}
+
+.att-cont li {
+  display: inline-block;
+}
+
+.input {
+  position: absolute;
+  transform: scale(4);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.att-cont li label {
+  border: 1px solid black;
+  margin-right: .5rem;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .2s;
+  padding: 1rem 1.5rem;
+}
+
+.att-not-text {
+  height: 1.2rem;
+  width: 1.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  display: inline-block;
+  opacity: .6;
+}
+
+.att:hover, .input:hover + .att, .input:checked + label {
+  background-color: black;
+  color: white;
+}
+
+.att-not-text:hover, .input-not-text:checked + label {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.add-cart-button {
+  width: 100%;
+  outline: unset;
+  border: unset;
+  background-color: #5ece7b;
+  color: white;
+  text-transform: uppercase;
+  padding: 1rem 0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.add-cart-button:hover {
+  transform: scale(1.02);
+}
+
+.button-div {
+  margin-bottom: 2rem;
+}
+
+.description {
+  font-family: "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.minicart-att {
+  display: flex;
+}
+
+.minicart-att-value {
+  font-size: .8rem !important;
+  padding: .2rem;
+  border: 1px solid black;
+  text-align: center;
+  margin-right: .3rem !important;
+}
+
+.big-cart-att {
+  font-size: 1rem !important;
+  padding: .7rem 1rem;
+  margin-right: .8rem !important;
+}
+
+.value-not-text {
+  height: .8rem;
+  width: .8rem;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+.big-cart-not-text {
+  height: 2rem;
+  width: 2rem;
+  margin-right: .8rem !important; 
 }
 
 h1 {

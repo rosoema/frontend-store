@@ -28,7 +28,6 @@ class MiniCart extends Component {
         let noMatch = oldCart.filter( item => item.id !== e.target.dataset.value );
 
         newCart = [
-            ...noMatch,
             {
                 id: e.target.dataset.value,
                 num: match[0].num + 1,
@@ -36,8 +35,10 @@ class MiniCart extends Component {
                 brand: match[0].brand,
                 gallery: match[0].gallery,
                 price: match[0].price,
-                attributes: match[0].attributes
-            }
+                attributes: match[0].attributes,
+                chosenAtt: match[0].chosenAtt
+            },
+            ...noMatch
         ];
         this.setState({
             cart: newCart
@@ -54,7 +55,6 @@ class MiniCart extends Component {
 
         match[0].num > 1 ?
             newCart = [
-                ...noMatch,
                 {
                     id: e.target.dataset.value,
                     num: match[0].num - 1,
@@ -62,8 +62,10 @@ class MiniCart extends Component {
                     brand: match[0].brand,
                     gallery: match[0].gallery,
                     price: match[0].price,
-                    attributes: match[0].attributes
-                }
+                    attributes: match[0].attributes,
+                    chosenAtt: match[0].chosenAtt
+                },
+                ...noMatch
             ]
             : newCart = [...noMatch]
 
@@ -124,15 +126,26 @@ class MiniCart extends Component {
                                                     <div>
                                                         {
                                                             JSON.parse(item.attributes).map( set => 
-                                                                set.type === "text" ?
-                                                                set.items.map( item => 
-                                                                    <p key={item.name}>{item.displayValue}</p>
+                                                                JSON.parse(item.chosenAtt).map( chosenSet => 
+                                                                    set.type === "text" && set.name === chosenSet.set ?
+                                                                        <div key={set.name} className="minicart-att">
+                                                                            {set.items.map( value => 
+                                                                                value.value === chosenSet.value ?    
+                                                                                <p className="minicart-att-value" key={value.id} style={{opacity: "1"}}>{value.id}</p>
+                                                                                : <p className="minicart-att-value" key={value.id} style={{opacity: "0.3"}}>{value.id}</p>
+                                                                            )}
+                                                                        </div>
+                                                                    : set.type === "swatch" && set.name === chosenSet.set ?
+                                                                        <div key={set.name} className="minicart-att">
+                                                                            {set.items.map( value => 
+                                                                                value.displayValue === chosenSet.value ?    
+                                                                                <p className="minicart-att-value value-not-text" key={value.id} style={{backgroundColor: `${value.value}`, opacity: "1"}}></p>
+                                                                                : <p className="minicart-att-value value-not-text" key={value.id} style={{backgroundColor: `${value.value}`, opacity: ".3"}}></p>
+                                                                            )}
+                                                                        </div>
+                                                                    : null
                                                                 )
-                                                                : 
-                                                                set.items.map( item => 
-                                                                    <p key={item.name} style={{backgroundColor: `${item.value}`}}>hello</p>
-                                                                )
-                                                            )
+                                                            )                                            
                                                         }
                                                     </div>
                                                 </div>

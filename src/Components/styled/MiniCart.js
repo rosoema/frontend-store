@@ -37,7 +37,7 @@ const ProductWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 1rem 0 0 0;
+    margin: 1rem 0 1.5rem 0;
     
     p {
         margin: 0 0 .6rem 0;

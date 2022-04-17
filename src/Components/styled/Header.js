@@ -42,7 +42,7 @@ const Bag = styled.div`
     position: absolute;
     flex-direction: column;
     width: 16rem;
-    max-height: 28rem;
+    max-height: 40rem;
     overflow-y: scroll;
     overflow-x: hidden;
     top: 3.7rem;

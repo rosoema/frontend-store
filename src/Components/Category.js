@@ -9,14 +9,14 @@ class Category extends Component {
 
         super(props);
         this.state = {
-            category: this.props.path,
+            category: localStorage.getItem("category"),
             data: this.props.value,
             currency: localStorage.getItem("preferredCurrency") || "$",
             cart: JSON.parse(localStorage.getItem("cart"))
         }
 
         if (window.performance) {
-            if (performance.navigation.type === 1) {
+            if (performance.navigation.type === 1 || performance.navigation.type === 0) {
                 let url = window.location.href;
                 let theEnd = url.split("/").pop();
                 if(theEnd === ""){
@@ -146,7 +146,11 @@ class Category extends Component {
                             category.name === this.state.category ? 
                                 category.products.map( product =>
                                     <ProductDiv key={product.id} style={{opacity: product.inStock ? "1" : "0.3", }}>
-                                        <Link to={"/product/" + product.id}>
+                                        <Link to={"/product/" + product.id} onClick={() => {
+                                                localStorage.setItem("product-id", product.id);
+                                                localStorage.setItem("product-category", product.category);
+                                                localStorage.setItem("product-image", product.gallery[0]);
+                                            }}>
                                             <div className="productImage" style={{backgroundImage: `url(${product.gallery[1] ? product.gallery[1] : product.gallery[0]})`}}>
                                                 {product.inStock === false && 
                                                     <p>OUT OF STOCK</p>}
@@ -173,7 +177,11 @@ class Category extends Component {
                                                     data-price={JSON.stringify(product.prices)}
                                                     data-attributes={JSON.stringify(product.attributes)}
                                                 />
-                                            : <Link to={"/product/" + product.id} className="addToCart">
+                                            : <Link to={"/product/" + product.id} className="addToCart" onClick={() => {
+                                                localStorage.setItem("product-id", product.id);
+                                                localStorage.setItem("product-category", product.category);
+                                                localStorage.setItem("product-image", product.gallery[0]);
+                                            }}>
                                                 <img src={addToCart} alt="add-to-cart"/>
                                             </Link>
                                             : null
