@@ -11,14 +11,15 @@ class Category extends Component {
         this.state = {
             category: localStorage.getItem("category"),
             data: this.props.value,
-            currency: localStorage.getItem("preferredCurrency") || "$",
+            currency: localStorage.getItem("preferredCurrency"),
             cart: JSON.parse(localStorage.getItem("cart"))
         }
 
         if (window.performance) {
-            if (performance.navigation.type === 1 || performance.navigation.type === 0) {
+            if (performance.navigation.type === 1 || performance.navigation.type === 0 || performance.navigation.type === 2) {
                 let url = window.location.href;
                 let theEnd = url.split("/").pop();
+                this.state.currency = localStorage.getItem("preferredCurrency") || "$"
                 if(theEnd === ""){
                     localStorage.setItem("category", this.props.path);
                     this.state.category = this.props.path
@@ -33,10 +34,10 @@ class Category extends Component {
     }
 
     putInCart(e){
-        let oldCart = this.state.cart;
+        let oldCart = JSON.parse(localStorage.getItem("cart"));
         let newCart;
 
-        if(localStorage.getItem("cart") === null){
+        if(localStorage.getItem("cart") === null || localStorage.getItem("cart") === "[]"){
             newCart = [
                 {
                     id: e.target.dataset.value,
@@ -48,11 +49,8 @@ class Category extends Component {
                     attributes: e.target.dataset.attributes
                 }
             ];
-            this.setState({
-                cart: newCart
-            }, () => {
-                localStorage.setItem("cart", JSON.stringify(this.state.cart))
-            });
+            localStorage.setItem("cart", JSON.stringify(newCart));
+            window.location.reload();
         } else {
             let match = oldCart.filter( item => item.id === e.target.dataset.value );
             let noMatch = oldCart.filter( item => item.id !== e.target.dataset.value );
@@ -70,12 +68,9 @@ class Category extends Component {
                         attributes: e.target.dataset.attributes
                     }
                 ];
-                this.setState({
-                    cart: newCart
-                }, () => {
-                    localStorage.setItem("cart", JSON.stringify(this.state.cart))
-                });
-            } else {
+                localStorage.setItem("cart", JSON.stringify(newCart));
+                window.location.reload();
+                } else {
                 newCart = [
                     ...noMatch,
                     {
@@ -88,31 +83,18 @@ class Category extends Component {
                         attributes: e.target.dataset.attributes
                     }
                 ];
-                this.setState({
-                    cart: newCart
-                }, () => {
-                    localStorage.setItem("cart", JSON.stringify(this.state.cart))
-                });
+                localStorage.setItem("cart", JSON.stringify(newCart));
             }
         }
     }
     
     render() {
-
+        
         window.addEventListener("click", () => {
-            let url = window.location.href;
-            let theEnd = url.split("/").pop();
-            if(theEnd === ""){
-                localStorage.setItem("category", this.props.path);
+            if(localStorage.getItem("category") !== this.state.category || localStorage.getItem("preferredCurrency") !== this.state.currency){
                 this.setState({
-                    category: this.props.path,
-                    currency: localStorage.getItem("preferredCurrency") ? localStorage.getItem("preferredCurrency") : "$"
-                })
-            } else {
-                localStorage.setItem("category", theEnd);
-                this.setState({
-                    category: theEnd,
-                    currency: localStorage.getItem("preferredCurrency") ? localStorage.getItem("preferredCurrency") : "$"
+                    category: localStorage.getItem("category"),
+                    currency: localStorage.getItem("preferredCurrency")
                 })
             }
         });
@@ -120,20 +102,11 @@ class Category extends Component {
         window.addEventListener("popstate", () => {
             let url = window.location.href;
             let theEnd = url.split("/").pop();
-            if(theEnd !== ""){
-                this.setState(
-                    {
-                        category: theEnd,
-                        currency: localStorage.getItem("preferredCurrency") || "$"
-                    }
-                );
-            } else {
-                this.setState(
-                    {
-                        category: this.props.path,
-                        currency: localStorage.getItem("preferredCurrency") || "$"
-                    }
-                );
+            if(localStorage.getItem("category") !== theEnd){
+                this.setState({
+                    category: theEnd
+                })
+                localStorage.setItem("category", theEnd)
             }
         });
 

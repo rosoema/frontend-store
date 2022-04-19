@@ -7,19 +7,29 @@ import { Query } from "@apollo/client/react/components";
 import Cart from "./Components/Cart.js";
 import Product from "./Components/Product.js";
 
+let links = document.getElementsByClassName("header-links");
+
+function addCurrent () {
+    let url = window.location.href;
+    let theEnd = url.split("/").pop();
+    for(let i = 0; i < links.length; i++){
+        if(links[i].classList.contains(theEnd)){
+            links[i].classList.add("current");
+        } else {
+            links[i].classList.remove("current");
+        }
+    }
+}
+
+window.addEventListener("click", () => {
+    addCurrent();
+});
+
 class App extends Component {
 
-  componentDidMount(){
-      if(localStorage.getItem("category") === null){
-        localStorage.setItem("category", "all")
-        window.location.reload()
-      }
-
-      if(localStorage.getItem("preferredCurrency") === null){
-        localStorage.setItem("preferredCurrency", "$")
-        window.location.reload()
-      }
-  }
+    componentDidMount(){
+        return localStorage.getItem("preferredCurrency") ? null : localStorage.setItem("preferredCurrency", "$")
+    }
 
   render(){
     

@@ -96,9 +96,9 @@ main {
   color: white;
   border-radius: 50%;
   text-align: center;
-  padding: 0.2rem 0.4rem .2rem .35rem;
+  padding: 0.15rem 0.4rem 0.3rem 0.4rem;
   font-size: .7rem;
-  font-weight: 900 !important;
+  font-weight: 700 !important;
   font-family: "Roboto", sans-serif;
 }
 

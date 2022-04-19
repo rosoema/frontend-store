@@ -5,26 +5,6 @@ import Currency from "./Currency.js";
 import MiniCart from "./MiniCart.js";
 import { Nav , List , ListItem, Image } from "./styled/Header";
 
-
-let links = document.getElementsByClassName("header-links");
-
-function addCurrent () {
-    let url = window.location.href;
-    let theEnd = url.split("/").pop();
-    for(let i = 0; i < links.length; i++){
-        if(links[i].classList.contains(theEnd)){
-            links[i].classList.add("current");
-        } else {
-            links[i].classList.remove("current");
-        }
-    }
-}
-
-window.addEventListener("click", () => {
-    addCurrent();
-});
-
-
 class Navbar extends Component {
 
     constructor(props){
@@ -35,17 +15,7 @@ class Navbar extends Component {
         }
     }
 
-    componentDidMount(){
-        addCurrent();
-    }
-
     render() {
-
-        window.addEventListener("click", () => {
-            this.setState({
-                cart: JSON.parse(localStorage.getItem("cart"))
-            })
-        });
 
         return (
             <Nav>
@@ -61,10 +31,6 @@ class Navbar extends Component {
                         <Currency value={this.state.data.currencies}/>
                         <MiniCart value={this.state.data}/>
                     </div>
-                    {this.state.cart? 
-                        <p className="cart-num">{this.state.cart.length}</p>
-                        : null
-                    }
             </Nav>
                         
                     

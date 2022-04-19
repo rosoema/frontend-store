@@ -19,7 +19,6 @@ class Cart extends Component {
         let noMatch = oldCart.filter( item => item.id !== e.target.dataset.value );
 
         newCart = [
-            ...noMatch,
             {
                 id: e.target.dataset.value,
                 num: match[0].num + 1,
@@ -27,13 +26,18 @@ class Cart extends Component {
                 brand: match[0].brand,
                 gallery: match[0].gallery,
                 price: match[0].price,
-                attributes: match[0].attributes
-            }
+                attributes: match[0].attributes,
+                chosenAtt: match[0].chosenAtt
+            },
+            ...noMatch
         ];
         this.setState({
             cart: newCart
         }, () => {
-            localStorage.setItem("cart", JSON.stringify(this.state.cart))
+            localStorage.setItem("cart", JSON.stringify(this.state.cart));
+            this.setState({
+                total: []
+            })
         });
     }
 
@@ -45,7 +49,6 @@ class Cart extends Component {
 
         match[0].num > 1 ?
             newCart = [
-                ...noMatch,
                 {
                     id: e.target.dataset.value,
                     num: match[0].num - 1,
@@ -53,25 +56,24 @@ class Cart extends Component {
                     brand: match[0].brand,
                     gallery: match[0].gallery,
                     price: match[0].price,
-                    attributes: match[0].attributes
-                }
+                    attributes: match[0].attributes,
+                    chosenAtt: match[0].chosenAtt
+                },
+                ...noMatch
             ]
             : newCart = [...noMatch]
 
         this.setState({
             cart: newCart
         }, () => {
-            localStorage.setItem("cart", JSON.stringify(this.state.cart))
+            localStorage.setItem("cart", JSON.stringify(this.state.cart));
+            this.setState({
+                total: []
+            })
         });
     }
 
     render(){
-        window.addEventListener("click", () => {
-            this.setState({
-                cart: JSON.parse(localStorage.getItem("cart")),
-                total: []
-            })
-        });
 
         return (
             <div className="cart-container">
@@ -91,10 +93,10 @@ class Cart extends Component {
                                                     JSON.parse(item.price).map( curr =>
                                                         {
                                                             if(curr.currency.symbol === localStorage.getItem("preferredCurrency")) { 
+                                                                this.state.total.push(curr.amount * item.num)
                                                                 return <p key={curr.currency.symbol} className="cart-product-price">
                                                                             {curr.currency.symbol}
-                                                                            <span>{curr.amount * item.num}</span>
-                                                                            {this.state.total.push(curr.amount * item.num)}
+                                                                            <span>{Math.round((curr.amount * item.num) * 100) / 100}</span>
                                                                         </p>
                                                             }
                                                         }

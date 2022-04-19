@@ -10,7 +10,8 @@ class Product extends Component {
             data: this.props.value,
             current_photo: localStorage.getItem("product-image"),
             cart: JSON.parse(localStorage.getItem("cart")),
-            product_att: JSON.parse(localStorage.getItem("attributes"))
+            product_att: JSON.parse(localStorage.getItem("attributes")),
+            currency: localStorage.getItem("preferredCurrency")
         }
     }
 
@@ -49,10 +50,10 @@ class Product extends Component {
     }
 
     add(e){
-        let oldCart = this.state.cart;
+        let oldCart = JSON.parse(localStorage.getItem("cart"));
         let newCart;
 
-        if(localStorage.getItem("cart") === null){
+        if(localStorage.getItem("cart") === null || localStorage.getItem("cart") === "[]"){
             newCart = [
                 {
                     id: e.target.dataset.value,
@@ -71,8 +72,8 @@ class Product extends Component {
                 localStorage.setItem("cart", JSON.stringify(this.state.cart))
             });
         } else {
-            let match = oldCart.filter( item => item.id === e.target.dataset.value );
-            let noMatch = oldCart.filter( item => item.id !== e.target.dataset.value );
+            let match = oldCart.filter( item => item.id === e.target.dataset.value);
+            let noMatch = oldCart.filter( item => item.id !== e.target.dataset.value);
         
             if(match.length <= 0){
                 newCart = [
@@ -117,12 +118,13 @@ class Product extends Component {
     }
 
     render() {
-
         window.addEventListener("click", () => {
-            this.setState({
-                product_att: JSON.parse(localStorage.getItem("attributes"))
-            })
-        })
+            if(localStorage.getItem("preferredCurrency") !== this.state.currency){
+                this.setState({
+                    currency: localStorage.getItem("preferredCurrency")
+                })
+            }
+        });
 
         return (
             <div className="product-page-container">
@@ -207,7 +209,7 @@ class Product extends Component {
                                                         data-chosen={JSON.stringify(this.state.product_att)}
                                                     >ADD TO CART</button>
                                                 </div>
-                                                : null
+                                                : <p>Out of stock.</p>
                                             }
                                             <div className="description" dangerouslySetInnerHTML={{__html: product.description}}/>           
                                         </div>

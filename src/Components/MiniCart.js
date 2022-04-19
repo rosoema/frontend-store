@@ -43,7 +43,10 @@ class MiniCart extends Component {
         this.setState({
             cart: newCart
         }, () => {
-            localStorage.setItem("cart", JSON.stringify(this.state.cart))
+            localStorage.setItem("cart", JSON.stringify(this.state.cart));
+            this.setState({
+                total: []
+            });
         });
     }
 
@@ -72,30 +75,38 @@ class MiniCart extends Component {
         this.setState({
             cart: newCart
         }, () => {
-            localStorage.setItem("cart", JSON.stringify(this.state.cart))
+            localStorage.setItem("cart", JSON.stringify(this.state.cart));
+            this.setState({
+                total: []
+            });
         });
     }
 
     toggle(){
-        this.setState({miniCart: !this.state.miniCart})
+        this.setState({
+            miniCart: !this.state.miniCart,
+            cart: JSON.parse(localStorage.getItem("cart")),
+            total: []
+        })
     }
 
     render() {
-        window.addEventListener("click", () => {
-            this.setState({
-                cart: JSON.parse(localStorage.getItem("cart")),
-                total: []
-            })
-        });
 
         return (
             <div>
+                {this.state.cart ? 
+                    <p className="cart-num">{this.state.cart.length}</p>
+                    : null
+                }
                 {
                     this.state.miniCart && <Overlay height={document.body.offsetHeight < window.innerHeight ? window.innerHeight + "px" : document.body.offsetHeight + "px"}/>
                 }
                 <OuterClick onOuterClick= {
                     () => {
-                        this.setState({miniCart: false})
+                        this.setState({
+                            miniCart: false,
+                            total: []
+                        })
                 }} >
                 <img src={cart} alt="cart" onClick={this.toggle.bind(this)} className="mini-cart"/>
                     {this.state.miniCart &&
@@ -114,10 +125,10 @@ class MiniCart extends Component {
                                                         JSON.parse(item.price).map( curr =>
                                                             {
                                                                 if(curr.currency.symbol === localStorage.getItem("preferredCurrency")) {
+                                                                    this.state.total.push(curr.amount * item.num)
                                                                     return <p key={curr.currency.symbol} className="product-price">
                                                                                 {curr.currency.symbol}
-                                                                                <span>{curr.amount * item.num}</span>
-                                                                                {this.state.total.push(curr.amount * item.num)}
+                                                                                <span>{Math.round((curr.amount * item.num) * 100) / 100}</span>
                                                                             </p>
                                                                 }
                                                             }
@@ -166,7 +177,7 @@ class MiniCart extends Component {
                                     }
                                     <div className="total">
                                         <p>Total:</p>
-                                        <p>{this.state.currency}{Math.round(this.state.total.reduce((a,b) => a+b, 0) * 100) / 100}</p>
+                                        <p>{localStorage.getItem("preferredCurrency")}{Math.round(this.state.total.reduce((a,b) => a+b, 0) * 100) / 100}</p>
                                     </div>
                                     <div className="buttons">
                                         <Link to="/cart" onClick={() => { this.setState({miniCart: false})}}>View bag</Link>
