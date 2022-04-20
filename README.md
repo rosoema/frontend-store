@@ -10,7 +10,7 @@ Built a frontend eCommerce website wih a very simple yet detailed layout and fun
 
 Photos of my work are below.
 
-[image1](./src/Media/pic1.png)
+[./src/Media/pic1.png](./src/Media/pic1.png)
 
 [image2](./src/Media/pic2.png)
 
