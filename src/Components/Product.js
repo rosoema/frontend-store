@@ -95,6 +95,7 @@ class Product extends Component {
                     localStorage.setItem("cart", JSON.stringify(this.state.cart))
                 });
             } else {
+
                 newCart = [
                     ...noMatch,
                     {
